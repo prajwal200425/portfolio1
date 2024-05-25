@@ -1,0 +1,190 @@
+'+newName.value+'
+// Function get user input to fetch
+
+function getPublicIp() {
+  fetch("https://geolocation-db.com/json/", {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      currentCity = data.currentCity;
+      getWeatherData(data.city, currentUnit, hourlyorWeek);
+    });
+}
+getPublicIp();
+
+// Function to get Weather data
+
+function getWeatherData(city, unit, hourlyorWeek) {
+  const apiKey = "R6NH4S6R6T5RS6TFK247MDBSG";
+  fetch(
+    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services
+    /timeline/${city}/?unitGroup=metric&key=${apiKey}`,
+    {
+      method: "GET",
+    }
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      let today = data.curruntConditions;
+      if (unit === "C") {
+        temp.innerText = today.temp;
+      } else {
+        temp.innerText = celciusTofahrenheit(today.temp);
+        currentLocation.innerText = data.resolvedAddress;
+        condition.innerText = today.condition;
+        console.log(data);
+      }
+    });
+}
+
+// old api code 
+
+const apiKey = "3cdf32fa434f7f30abeba36b05888f74";
+const url = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+const searchBox = document.querySelector("#query input");
+const searchBtn = document.querySelector(".search-btn button");
+const weatherIcon = document.querySelector(".weather-icon");
+
+async function checkWeather(city) {
+  const response = await fetch(url + city + `&appid=${apiKey}`);
+  let data = await response.json();
+  
+
+  document.querySelector("#city").innerHTML = data.name;
+  document.querySelector("#temp").innerHTML = data.main.temp + "°C";
+  document.querySelector("#humidity").innerHTML = data.main.humidity + "%";
+  document.querySelector("#wind").innerHTML = data.wind.speed + " km/h";
+
+
+=============================><======================================================
+
+
+
+
+
+https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=metric&Key=${apiKey}&contentType=json
+
+
+
+
+async function checkWeather(city) {
+  const response = await fetch(url + city + `&appid=${apiKey}`);
+  let data = await response.json();
+}
+
+
+// remaining code im g button 
+
+
+// if (weatherIcon.data[0] == "Clouds") 
+  // {
+  //   weatherIcon.src = "/img/clouds.png";
+  // } 
+  // else if (weatherIcon.data[0] == "Clear")
+  //  {
+  //   weatherIcon.src = "/img/clear.png";
+  // }
+  // else if (weatherIcon.data[0] == "Rain") 
+  // {
+  //   weatherIcon.src = "/img/rain.png";
+  // }
+  // else if (weatherIcon.data[0] == "Drizzel") 
+  // {
+  //   weatherIcon.src = "/img/drizzel.png";
+  // }
+  // else if (weatherIcon.data[0] == "Mist") 
+  // {
+  //   weatherIcon.src = "/img/mist.png";
+  // }
+
+
+
+
+// searchBtn.addEventListener("click", () => {
+//   checkWeather(searchBox.value);
+// });
+
+
+// convert celcius To fahrenheit
+
+// function celciusTofahrenheit(temp) {
+//   return ((temp * 9) / 5 + 32).toFixed(1);
+// }
+
+// celciusTofahrenheit();
+
+
+// feedback css 
+
+ #contact {
+            position: relative;
+        }
+
+        #contact::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+        
+        }
+
+        
+
+        #contact-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 34px;
+        }
+
+        #contact-box input,
+        #contact-box textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 9px;
+            font-size: 1.1rem;
+        }
+
+        #contact-box form {
+            width: 40%;
+
+        }
+
+        #contact-box label {
+            font-size: 1.3rem;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+        }
+
+        /* Utility Clasess */
+        .h-primary {
+            font-size: 4rem;
+            padding: 12px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            color: brown;
+        }
+
+        .h-secondary {
+            font-size: 2.5rem;
+            padding: 13px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            color: chocolate;
+        }
+
+
+        .center {
+            text-align: center;
+        }
+
+        .btn {
+            padding: 6px 20px;
+            border: 2px solid white;
+            background-color: brown;
+            color: white;
+            margin: 17px;
+            font-size: 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+        }
